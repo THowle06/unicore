@@ -1,6 +1,10 @@
-def main():
-    print("Hello from backend!")
+from fastapi import FastAPI
 
+app = FastAPI(
+    title="UniCore API",
+    version="0.1.0",
+)
 
-if __name__ == "__main__":
-    main()
+@app.get("/health", tags=["health"])
+async def health_check() -> dict[str, str]:
+    return {"status": "ok"}
