@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    image: unicore-backend
+    container_name: unicore-backend
+    env_file:
+      .env
+    ports:
+      -"8000:8000"
+    restart: unless-stopped
