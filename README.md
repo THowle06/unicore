@@ -39,6 +39,7 @@
     - [Phase 4 (Future Enhancements)](#phase-4-future-enhancements)
   - [🤝 Contributing](#-contributing)
     - [Development Workflow](#development-workflow)
+  - [📚 Documentation](#-documentation)
   - [📄 License](#-license)
   - [📧 Contact](#-contact)
 
@@ -177,6 +178,10 @@ The API will be available at [http://localhost:8000](http://localhost:8000)
 
 ```text
 unicore/
+├── docs/
+│   ├── architecture.md
+│   ├── domain-model.md
+│   └── api-specification.md
 ```
 
 ## 🔧 Development
@@ -307,6 +312,12 @@ Contributions are welcome! Please read the [Contributing Guidelines](CONTRIBUTIN
 - Write tests for new features
 - Update documentation as needed
 - Ensure all tests pass before submitting PR
+
+## 📚 Documentation
+
+- [Backend Architecture](docs/architecture.md)
+- [Domain & Data Model](docs/domain-model.md)
+- [API Specification](docs/api-specification.md)
 
 ## 📄 License
 
