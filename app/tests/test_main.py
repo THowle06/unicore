@@ -7,6 +7,7 @@ def test_root(client: TestClient) -> None:
     assert response.status_code == 200
     assert response.json() == {"message": "Welcome to UniCore API!"}
 
+
 def test_health_check(client: TestClient) -> None:
     """Test health check endpoint."""
     response = client.get("/health")
