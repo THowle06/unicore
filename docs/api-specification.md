@@ -13,8 +13,19 @@ The API follows RESTful principles and uses JSON for all request and response bo
     - [1.2 Authentication](#12-authentication)
     - [1.3 Common Response Codes](#13-common-response-codes)
   - [2. Authentication Endpoints (Wrapper)](#2-authentication-endpoints-wrapper)
-    - [2.1 Get Current User](#21-get-current-user)
-      - [2.1.1 Response](#211-response)
+    - [2.1 Register User](#21-register-user)
+      - [2.1.1 Request Body](#211-request-body)
+      - [2.1.2 Response (201 Created)](#212-response-201-created)
+    - [2.2 Login](#22-login)
+      - [2.2.1 Request Body](#221-request-body)
+      - [2.2.2 Response](#222-response)
+    - [2.3 Logout](#23-logout)
+      - [2.3.1 Response](#231-response)
+    - [2.4 Refresh Token](#24-refresh-token)
+      - [2.4.1 Request Body](#241-request-body)
+      - [2.4.2 Response](#242-response)
+    - [2.5 Get Current User](#25-get-current-user)
+      - [2.5.1 Response](#251-response)
   - [3. Module Endpoints](#3-module-endpoints)
     - [3.1 Create Module](#31-create-module)
       - [3.1.1 Request Body](#311-request-body)
@@ -95,15 +106,116 @@ Unless otherwise stated, **all endpoints require authentication**.
 
 ## 2. Authentication Endpoints (Wrapper)
 
-> Note: Supabase handles authentication internally. These endpoints exist to provide a consistent API interface.
+> Note: These endpoints wrap Supabase Auth functionality, allowing authentication via API calls.
 
-### 2.1 Get Current User
+### 2.1 Register User
+
+```http
+POST /auth/register
+```
+
+#### 2.1.1 Request Body
+
+```json
+{
+  "email": "user@example.com",
+  "password": "securepassword123"
+}
+```
+
+#### 2.1.2 Response (201 Created)
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh_token": "...",
+  "user" {
+    "id": "uuid",
+    "email": "user@example.com"
+  }
+}
+```
+
+---
+
+### 2.2 Login
+
+```http
+POST /auth/login
+```
+
+#### 2.2.1 Request Body
+
+```json
+{
+  "email": "user@example.com",
+  "password": "securepassword123"
+}
+```
+
+#### 2.2.2 Response
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh_token": "...",
+  "user": {
+    "id": "uuid",
+    "email": "user@example.com"
+  }
+}
+```
+
+---
+
+### 2.3 Logout
+
+```http
+POST /auth/logout
+```
+
+#### 2.3.1 Response
+
+```json
+{
+  "message": "Successfully logged out"
+}
+```
+
+---
+
+### 2.4 Refresh Token
+
+```http
+POST /auth/refresh
+```
+
+#### 2.4.1 Request Body
+
+```json
+{
+  "refresh_token": "..."
+}
+```
+
+#### 2.4.2 Response
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh_token": "..."
+}
+```
+
+---
+
+### 2.5 Get Current User
 
 ```http
 GET /auth/me
 ```
 
-#### 2.1.1 Response
+#### 2.5.1 Response
 
 ```json
 {
