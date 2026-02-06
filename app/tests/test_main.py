@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 
+
 def test_root(client: TestClient) -> None:
     """Test root endpoint."""
     response = client.get("/")
