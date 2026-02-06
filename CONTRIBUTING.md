@@ -455,6 +455,7 @@ Update the README.md when:
 - Changing setup instructions
 - Modifying project structure
 - Adding new dependencies
+- Adding or restructuring documentation in `docs/`
 
 ## Review Process
 
