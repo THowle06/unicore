@@ -1,16 +1,16 @@
 from typing import Annotated
 
-from api.deps import get_supabase_client
 from fastapi import APIRouter, Depends, HTTPException, status
 from supabase import Client
 
+from app.api.deps import get_supabase_client
 from app.schemas.auth import TokenResponse, UserRegister
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
 
 @router.post(
-    "/register", response_model=UserRegister, status_code=status.HTTP_201_CREATED
+    "/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED
 )
 async def register_user(
     user_data: UserRegister, supabase: Annotated[Client, Depends(get_supabase_client)]
