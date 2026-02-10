@@ -15,6 +15,25 @@ router = APIRouter(prefix="/auth", tags=["authentication"])
 async def register_user(
     user_data: UserRegister, supabase: Annotated[Client, Depends(get_supabase_client)]
 ):
+    """Register a new user with email and password.
+
+    Args:
+        user_data: User registration details containing email and password.
+        supabase: Supabase client instance for authentication operations.
+
+    Raises:
+        HTTPException: 400 Bad Request if:
+            - Registration fails (user or session is None)
+            - Email is already registered
+            - Password doesn't meet security requirements
+            - Supabase service is unavailable 
+
+    Returns:
+        TokenResponse: Contains access token, refresh token, and user information.
+            - access_token: JWT token for authenting API requests
+            - refresh_token: Token used to obtain a new access token when expired
+            - user: User object with id and email
+    """
     try:
         response = supabase.auth.sign_up(
             {"email": user_data.email, "password": user_data.password}
